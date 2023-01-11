@@ -1,6 +1,6 @@
-from flask import render_template, jsonify
+from flask import jsonify, render_template
 
-from . import yacut, db
+from yacut import app, db
 
 
 class InvalidAPIUsage(Exception):
@@ -16,17 +16,17 @@ class InvalidAPIUsage(Exception):
         return dict(message=self.message)
 
 
-@yacut.errorhandler(InvalidAPIUsage)
+@app.errorhandler(InvalidAPIUsage)
 def invalid_api_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
 
-@yacut.errorhandler(404)
+@app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
 
 
-@yacut.errorhandler(500)
+@app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500

@@ -1,18 +1,19 @@
 from flask_wtf import FlaskForm
-from wtforms import URLField
+from wtforms import StringField, URLField
 from wtforms.validators import DataRequired, Length, Optional, Regexp
-from .constants import REGEXP
+
+from yacut.constants import REGEXP
 
 
 class URLForm(FlaskForm):
     original_link = URLField(
-        'Оригинальная ссылка',
+        'Длинная ссылка',
         validators=[DataRequired(message='Обязательное поле')]
     )
-    custom_id = URLField(
-        'Новая короткая ссылка',
+    custom_id = StringField(
+        'Ваш вариант короткой ссылки',
         validators=[
             Regexp(REGEXP, flags=0,
                    message='Допускаются цифры, буквы латинского алфавита'),
-            Length(6, 16, message='От 6 до 16 символов'), Optional()]
+            Length(2, 16, message='От 6 до 16 символов'), Optional()]
     )

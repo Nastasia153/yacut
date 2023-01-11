@@ -1,8 +1,7 @@
 from datetime import datetime
 
 from yacut import db
-
-FIELDS = {'original': 'url', 'short': 'custom_id'}
+from yacut.constants import HOST
 
 
 class URLMap(db.Model):
@@ -14,10 +13,14 @@ class URLMap(db.Model):
     def to_dict(self):
         return dict(
             url=self.original,
-            cshort_link=self.short,
+            short_link=f'http://{HOST}/{self.short}',
         )
 
     def from_dict(self, data):
-        for field in FIELDS.keys():
-            if field in data:
-                setattr(self, field, data[field])
+        api_dict = {
+            'original': 'url',
+            'short': 'custom_id'
+        }
+        for field in api_dict.keys():
+            if api_dict[field] in data:
+                setattr(self, field, data[api_dict[field]])

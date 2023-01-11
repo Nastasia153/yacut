@@ -5,7 +5,9 @@
     ./yacut
  max-complexity = 10
  exclude = 
-    tests
-    migrations
+    tests,
+    */migrations,
+    venv/,
+    env/
  per-file-ignores =
     __init__.py: F401, E402
