@@ -15,5 +15,5 @@ class URLForm(FlaskForm):
         validators=[
             Regexp(REGEXP, flags=0,
                    message='Допускаются цифры, буквы латинского алфавита'),
-            Length(2, 16, message='От 6 до 16 символов'), Optional()]
+            Length(1, 16, message='От 1 до 16 символов'), Optional()]
     )
