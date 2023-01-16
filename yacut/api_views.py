@@ -21,7 +21,7 @@ def create_url():
     if not custom_id:
         custom_id = data['custom_id'] = get_unique_short_id(const.MAX_LENGTH)
     is_match = fullmatch(const.REGEXP, custom_id)
-    if not is_match or len(custom_id) > const.MAX_LEN_CUSTOM_ID:
+    if not is_match:
         raise InvalidAPIUsage(const.INVALID_ARG_NAME)
     if check_url(custom_id) is not None:
         raise InvalidAPIUsage(f'Имя "{custom_id}" уже занято.')
