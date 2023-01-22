@@ -1,7 +1,7 @@
 MAX_LENGTH = 6
 MAX_LEN_CUSTOM_ID = 16
 
-REGEXP = '^[A-Za-z0-9]{1,16}$'
+REGEXP = fr'^[A-Za-z0-9]{{1,{MAX_LEN_CUSTOM_ID}}}$'
 HOST = 'localhost'
 
 NO_REQUEST_BODY = 'Отсутствует тело запроса'
